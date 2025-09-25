@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header Clone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f7f9fd;
+      padding: 8px 30px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* Left Section */
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .left-section img {
+      height: 50px;
+    }
+
+    .left-section .text {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .left-section .text strong {
+      display: block;
+      font-weight: 600;
+    }
+
+    /* Center Section (Menu) */
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+      position: relative;
+    }
+
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: #0077b6;
+    }
+
+    /* Right Section */
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .login-btn {
+      background: #0a4d63;
+      color: white;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .lang-switch img {
+      height: 18px;
+      width: 18px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Left Section -->
+    <div class="left-section">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png" alt="India Logo">
+      <div class="text">
+        <span>पशुपालन और डेयरी विभाग</span>
+        <strong style="font-weight: 600; font-size:small">DEPARTMENT OF ANIMAL HUSBANDRY AND DAIRYING</strong>
+      </div>
+      <img src="https://sdn.signalhire.co/storage/company/12eb/6e3d/e059/da2b/6fe3/9950/8452/76cb.webp" alt="NDDB Logo" height="50">
+      <div style="width:50px; height:60px; font-size:12px; color:rgb(144, 84, 5); font-weight:bolder" class="text"><strong>NATIONAL DAIRY DEVELOPMENT BOARD</strong></div>
+    </div>
+
+    <!-- Center Menu -->
+    <nav>
+      <a href="/" class="<%= (activePage === 'home') ? 'active' : '' %>">Home</a>
+      <a href="/about" class="<%= (activePage === 'about') ? 'active' : '' %>">Contact Us</a>
+      <a href="/register" class="<%= (activePage === 'register') ? 'active' : '' %>">Register</a>
+    </nav>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <button class="login-btn"><a style="text-decoration:none; color:white" href="/login">Login</a></button>
+      <div class="lang-switch">
+        <img src="https://cdn-icons-png.flaticon.com/512/44/44452.png" alt="Lang">
+        English
+      </div>
+    </div>
+  </header>
+</body>
+</html>

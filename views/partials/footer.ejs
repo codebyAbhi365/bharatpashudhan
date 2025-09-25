@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footer Clone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    footer {
+      background: #0a4d63;
+      color: white;
+      padding: 20px 40px;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    /* Left Section */
+    .footer-left img {
+      height: 100px;
+    }
+
+    /* Center Section */
+    .footer-center {
+      text-align: center;
+      flex: 1;
+    }
+
+    .footer-center h3 {
+      margin: 0 0 8px 0;
+    }
+
+    .footer-center p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Right Section */
+    .footer-right {
+      text-align: center;
+    }
+
+    .footer-right h3 {
+      margin: 0 0 8px 0;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .social-icons img {
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+    }
+
+    /* Bottom Right Info */
+    .version-info {
+      text-align: right;
+      font-size: 12px;
+      margin-top: 10px;
+      color: #d9e6f2;
+    }
+  </style>
+</head>
+<body>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Left -->
+      <div class="footer-left">
+        <img style="clip-path: circle(40% at 50% 50%);" src="BHARAT-PASHUDHAN.jpg" alt="Bharat Pashudhan Logo">
+      </div>
+
+      <!-- Center -->
+      <div class="footer-center">
+        <h3>Contact Us</h3>
+        <p>Project[dot]office[at]ndlm[dot]co[dot]in</p>
+      </div>
+
+      <!-- Right -->
+      <div class="footer-right">
+        <h3>Social Links</h3>
+        <div class="social-icons">
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Info -->
+    <div class="version-info">
+      Version No. 1.29<br>
+      Version Date 05-08-2025
+    </div>
+  </footer>
+
+</body>
+</html>

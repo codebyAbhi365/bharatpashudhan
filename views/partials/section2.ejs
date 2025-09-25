@@ -1,0 +1,126 @@
+<style>
+  /* ================================
+   Bharat Pashudhan Process Section
+   ================================ */
+.bp-process-section {
+  background: #f4f7fe; /* matches site background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bp-process-section .bp-section-title h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1e293b; /* dark text */
+  margin-bottom: 10px;
+}
+
+.bp-process-section .bp-section-title p {
+  font-size: 1rem;
+  color: #64748b; /* muted gray */
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.bp-process-section .bp-process-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bp-process-section .bp-step {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+  padding: 30px 25px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bp-process-section .bp-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.bp-process-section .bp-step-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: #0d6efd; /* Bootstrap primary blue */
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.bp-process-section .bp-step-icon {
+  font-size: 2rem;
+  color: #0d6efd;
+  margin-bottom: 15px;
+}
+
+.bp-process-section .bp-step-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.bp-process-section .bp-step-description {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .bp-process-section .bp-process-steps {
+    flex-direction: column;
+  }
+  
+  .bp-process-section .bp-step {
+    margin-bottom: 20px;
+  }
+}
+
+</style>
+<section class="bp-process-section py-5">
+  <div class="container">
+    <div class="bp-section-title text-center">
+      <h2>Simple 3-Step Process</h2>
+      <p>Register your animals quickly and easily with our streamlined process</p>
+    </div>
+    
+    <div class="bp-process-steps">
+      <div class="bp-step">
+        <div class="bp-step-number">1</div>
+        <div class="bp-step-icon">
+          <i class="fas fa-camera"></i>
+        </div>
+        <h3 class="bp-step-title">Upload & Detect</h3>
+        <p class="bp-step-description">Upload a clear image of your animal and our AI will automatically detect the breed.</p>
+      </div>
+      
+      <div class="bp-step">
+        <div class="bp-step-number">2</div>
+        <div class="bp-step-icon">
+          <i class="fas fa-paw"></i>
+        </div>
+        <h3 class="bp-step-title">Animal Details</h3>
+        <p class="bp-step-description">Fill in the details about your animal's health, characteristics, and care requirements.</p>
+      </div>
+      
+      <div class="bp-step">
+        <div class="bp-step-number">3</div>
+        <div class="bp-step-icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <h3 class="bp-step-title">Owner Information</h3>
+        <p class="bp-step-description">Provide your contact details to complete the registration process.</p>
+      </div>
+    </div>
+  </div>
+</section>

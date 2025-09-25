@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bharat Pashudhan - Animal Registration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: url('form_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      filter: blur(8px);
+      z-index: -1;
+    }
+    .overlay {
+      display: none;
+    }
+    .main-content {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.20);
+      padding: 35px 30px;
+      color: #003057;
+      border: 1px solid rgba(227, 232, 238, 0.8);
+      margin: 0 auto;
+      backdrop-filter: blur(5px);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #003057;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #003057;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e3e8ee;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #f7f9fd;
+      color: #003057;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      transition: border 0.2s;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #888;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border: 2px solid #3b82f6;
+      background: #fff;
+    }
+    input[readonly] {
+      background: #e3e8ee;
+      cursor: not-allowed;
+    }
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+    .row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .row .form-group {
+      flex: 1;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 12px 25px;
+      background: #003057;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #005fa3;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
+    .btn-prev {
+      background: #9ca3af;
+      color: #003057;
+    }
+    .btn-prev:hover {
+      background: #6b7280;
+      color: #fff;
+    }
+    .btn-next, .btn-submit {
+      background: #10b981;
+      color: #fff;
+    }
+    .btn-next:hover, .btn-submit:hover {
+      background: #059669;
+      color: #fff;
+    }
+    .image-preview {
+      width: 100%;
+      max-height: 250px;
+      border: 2px dashed #d1d5db;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: #f7f9fd;
+    }
+    .image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      display: none;
+    }
+    .image-preview-placeholder {
+      padding: 30px;
+      text-align: center;
+      color: #888;
+    }
+    .image-preview-placeholder i {
+      font-size: 48px;
+      margin-bottom: 10px;
+      display: block;
+      color: #9ca3af;
+    }
+    .detect-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #8b5cf6;
+      color: #fff;
+      border: none;
+    }
+    .detect-btn:hover {
+      background: #7c3aed;
+      color: #fff;
+    }
+    .detection-loading {
+      display: none;
+      text-align: center;
+      padding: 15px;
+      background: rgba(16,185,129,0.10);
+      border-radius: 8px;
+      margin: 15px 0;
+      color: #003057;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 15px;
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .breed-result {
+      display: none;
+      text-align: center;
+      padding: 15px;
+      background: rgba(16,185,129,0.10);
+      border-radius: 8px;
+      margin: 15px 0;
+      color: #003057;
+      animation: fadeIn 0.5s ease;
+    }
+    .success-icon {
+      color: #10b981;
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    .form-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .form-title i {
+      color: #3b82f6;
+      font-size: 28px;
+    }
+    /* Progress Steps */
+    .progress-container {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 40px;
+      counter-reset: step;
+      z-index: 1;
+    }
+    .progress-container::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #ddd;
+      z-index: 1;
+      opacity: 0.5;
+    }
+    .progress-bar {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: #3b82f6;
+      z-index: 2;
+      transition: width 0.5s ease;
+    }
+    .progress-step {
+      position: relative;
+      width: 35px;
+      height: 35px;
+      background: #ddd;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+      font-weight: bold;
+      color: #555;
+      opacity: 0.8;
+    }
+    .progress-step.active {
+      background: #3b82f6;
+      color: white;
+      opacity: 1;
+    }
+    .progress-step.completed {
+      background: #10b981;
+      color: white;
+      opacity: 1;
+    }
+    .progress-step::before {
+      counter-increment: step;
+      content: counter(step);
+    }
+    .progress-step::after {
+      content: attr(data-title);
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #003057;
+      white-space: nowrap;
+      opacity: 0.9;
+    }
+    .form-step {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    .form-step.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Additional Styles for New Fields */
+    .image-upload-group {
+      margin-bottom: 20px;
+    }
+    .image-upload-group h4 {
+      margin-bottom: 10px;
+      color: #003057;
+      font-size: 16px;
+    }
+    .image-preview-small {
+      max-height: 150px;
+    }
+    .lactation-fields {
+      display: none;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .container {
+        max-width: 98vw;
+        padding: 18px 8px;
+      }
+      .main-content {
+        margin-top: 20px;
+      }
+    }
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.3rem;
+      }
+      .progress-step {
+        width: 28px;
+        height: 28px;
+        font-size: 0.95rem;
+      }
+      input, select, textarea, .btn {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="container">
+      <div class="form-title">
+        <h2>Animal Registration Form</h2>
+      </div>
+      <!-- Progress Steps -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+        <div class="progress-step active" data-title="Breed Detection"></div>
+        <div class="progress-step" data-title="Animal Details"></div>
+        <div class="progress-step" data-title="Owner Details"></div>
+      </div>
+      <form id="animalForm">
+        <!-- Step 1: Breed Detection -->
+        <div class="form-step active" id="step-1">
+          <div class="image-upload-group">
+            <h4>Animal Face Image</h4>
+            <div class="image-preview image-preview-small" id="faceImagePreview">
+              <div class="image-preview-placeholder">
+                <i class="fas fa-camera"></i>
+                <p>Upload animal's face image</p>
+              </div>
+              <img id="previewFaceImage" src="" alt="Face Preview">
+            </div>
+            <input type="file" id="faceImage" name="faceImage" accept="image/*" required>
+          </div>
+          
+          <div class="image-upload-group">
+            <h4>Animal Full Body Image</h4>
+            <div class="image-preview image-preview-small" id="bodyImagePreview">
+              <div class="image-preview-placeholder">
+                <i class="fas fa-image"></i>
+                <p>Upload animal's full body image</p>
+              </div>
+              <img id="previewBodyImage" src="" alt="Body Preview">
+            </div>
+            <input type="file" id="bodyImage" name="bodyImage" accept="image/*" required>
+          </div>
+          
+          <!-- Added fields on the first page -->
+          <div class="row">
+            <div class="form-group">
+              <label for="milkPerDay">Milk Production (liters/day)</label>
+              <input type="number" id="milkPerDay" name="milkPerDay" step="0.1" placeholder="Average milk per day">
+            </div>
+            <div class="form-group">
+              <label for="wither">Wither Height (cm)</label>
+              <input type="number" id="wither" name="wither" placeholder="Height at withers">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="purpose">Purpose</label>
+            <select id="purpose" name="purpose" required>
+              <option value="">Select</option>
+              <option value="Dairy">Dairy</option>
+              <option value="Draught">Draught</option>
+              <option value="Breeding">Breeding</option>
+              <option value="Meat">Meat</option>
+              <option value="Dual Purpose">Dual Purpose</option>
+            </select>
+          </div>
+          
+          <!-- Breed Detection Section (Moved Below Input Fields) -->
+          <button type="button" class="btn detect-btn" id="detectBreed">
+            <i class="fas fa-search"></i> Detect Breed
+          </button>
+          
+          <div class="detection-loading" id="detectionLoading">
+            <div class="spinner"></div>
+            <p>Analyzing image and detecting breed...</p>
+          </div>
+          
+          <div class="breed-result" id="breedResult">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h3>Breed Detected Successfully!</h3>
+            <p>The breed has been auto-filled below</p>
+          </div>
+          
+          <div class="form-group">
+            <label for="breed">Detected Breed</label>
+            <input type="text" id="breed" name="breed" placeholder="Breed will be auto-detected" readonly>
+          </div>
+          
+          <div class="btn-container">
+            <div></div>
+            <button type="button" class="btn btn-next" id="next-1">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        
+        <!-- Step 2: Animal Details -->
+        <div class="form-step" id="step-2">
+          <div class="row">
+            <div class="form-group">
+              <label for="age">Age (Years)</label>
+              <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="weight">Weight (kg)</label>
+              <input type="number" id="weight" name="weight">
+            </div>
+            <div class="form-group">
+              <label for="color">Color</label>
+              <input type="text" id="color" name="color">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="tagId">Unique Tag ID</label>
+            <input type="text" id="tagId" name="tagId" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="vaccinationStatus">Vaccination Status</label>
+            <input type="text" id="vaccinationStatus" name="vaccinationStatus" placeholder="e.g. FMD vaccinated">
+          </div>
+          
+          <div class="form-group">
+            <label for="lastCheckup">Last Checkup Date</label>
+            <input type="date" id="lastCheckup" name="lastCheckup">
+          </div>
+          
+          <div class="form-group">
+            <label for="nutrition">Nutrition Info</label>
+            <textarea id="nutrition" name="nutrition" placeholder="Feeding details"></textarea>
+          </div>
+          
+          <div class="btn-container">
+            <button type="button" class="btn btn-prev" id="prev-2"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button type="button" class="btn btn-next" id="next-2">Next <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+        
+        <!-- Step 3: Owner Details -->
+        <div class="form-step" id="step-3">
+          <h3 style="color:#003057;">Owner Details</h3>
+          <div class="form-group">
+            <label for="ownerName">Owner Name</label>
+            <input type="text" id="ownerName" name="ownerName" required>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="ownerPhone">Owner Phone</label>
+              <input type="tel" id="ownerPhone" name="ownerPhone" required>
+            </div>
+            <div class="form-group">
+              <label for="location">Village / District</label>
+              <input type="text" id="location" name="location">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="flwId">FLW ID / Aadhaar</label>
+            <input type="text" id="flwId" name="flwId" required>
+          </div>
+          <div class="btn-container">
+            <button type="button" class="btn btn-prev" id="prev-3"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button type="submit" class="btn btn-submit"><i class="fas fa-paper-plane"></i> Register Animal</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elements
+      const formSteps = document.querySelectorAll('.form-step');
+      const progressSteps = document.querySelectorAll('.progress-step');
+      const progressBar = document.getElementById('progress');
+      const nextBtns = document.querySelectorAll('.btn-next');
+      const prevBtns = document.querySelectorAll('.btn-prev');
+      const detectBtn = document.getElementById('detectBreed');
+      const detectionLoading = document.getElementById('detectionLoading');
+      const breedResult = document.getElementById('breedResult');
+      const breedInput = document.getElementById('breed');
+      const faceImageInput = document.getElementById('faceImage');
+      const bodyImageInput = document.getElementById('bodyImage');
+      const previewFaceImage = document.getElementById('previewFaceImage');
+      const previewBodyImage = document.getElementById('previewBodyImage');
+      const form = document.getElementById('animalForm');
+      
+      // Common animal breeds for simulation
+      const animalBreeds = [
+        "Sahiwal", "Gir", "Red Sindhi", "Tharparkar", "Kankrej", 
+        "Ongole", "Hariana", "Deoni", "Kangayam", "Amritmahal"
+      ];
+      
+      let currentStep = 0;
+      
+      function updateSteps() {
+        formSteps.forEach((step, idx) => {
+          step.classList.toggle('active', idx === currentStep);
+        });
+        progressSteps.forEach((step, idx) => {
+          step.classList.toggle('active', idx === currentStep);
+          step.classList.toggle('completed', idx < currentStep);
+        });
+        progressBar.style.width = `${(currentStep / (formSteps.length - 1)) * 100}%`;
+      }
+      
+      nextBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          let isValid = true;
+          const currentInputs = formSteps[currentStep].querySelectorAll('input[required], select[required]');
+          currentInputs.forEach(input => {
+            if (!input.value.trim()) {
+              isValid = false;
+              input.style.borderColor = 'red';
+            } else {
+              input.style.borderColor = '#e3e8ee';
+            }
+          });
+          if (isValid) {
+            currentStep++;
+            updateSteps();
+          }
+        });
+      });
+      
+      prevBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentStep--;
+          updateSteps();
+        });
+      });
+      
+      // Face image preview
+      faceImageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.addEventListener('load', function() {
+            previewFaceImage.src = reader.result;
+            previewFaceImage.style.display = 'block';
+            document.querySelector('#faceImagePreview .image-preview-placeholder').style.display = 'none';
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      // Body image preview
+      bodyImageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.addEventListener('load', function() {
+            previewBodyImage.src = reader.result;
+            previewBodyImage.style.display = 'block';
+            document.querySelector('#bodyImagePreview .image-preview-placeholder').style.display = 'none';
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      detectBtn.addEventListener('click', function() {
+        if (!faceImageInput.files.length) {
+          alert('Please upload a face image first');
+          return;
+        }
+        detectionLoading.style.display = 'block';
+        breedResult.style.display = 'none';
+        setTimeout(() => {
+          detectionLoading.style.display = 'none';
+          breedResult.style.display = 'block';
+          const randomBreed = animalBreeds[Math.floor(Math.random() * animalBreeds.length)];
+          breedInput.value = randomBreed;
+        }, 2500);
+      });
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Animal registered successfully!');
+        form.reset();
+        currentStep = 0;
+        updateSteps();
+        previewFaceImage.style.display = 'none';
+        previewBodyImage.style.display = 'none';
+        document.querySelector('#faceImagePreview .image-preview-placeholder').style.display = 'block';
+        document.querySelector('#bodyImagePreview .image-preview-placeholder').style.display = 'block';
+        breedResult.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

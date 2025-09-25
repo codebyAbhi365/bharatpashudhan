@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bharat Pashudhan Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url("loginbackground.jpg") no-repeat center center/cover; /* Background image src blank */
+      position: relative;
+    }
+
+    /* Blur overlay */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      backdrop-filter: blur(6px); /* blur effect */
+      background: rgba(0, 48, 87, 0.4); /* semi-transparent overlay */
+      z-index: -1;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar img {
+      height: 65px;
+      width: auto;
+    }
+
+    /* Login form */
+    .login-container {
+      text-align: center;
+      color: #fff;
+      margin-top: 80px;
+      width: 90%;
+      max-width: 450px;
+    }
+
+    .login-container img {
+      width: 150px; /* Bigger logo */
+      margin-bottom: 1rem;
+    }
+
+    .login-container h2 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .login-container p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 15px;
+      margin: 0.8rem 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.2); /* glass effect */
+      backdrop-filter: blur(5px);
+    }
+
+    .login-container input::placeholder {
+      color: #e0e0e0;
+    }
+
+    /* Row for links */
+    .links-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.8rem 0;
+    }
+
+    .links-row a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .links-row a:hover {
+      text-decoration: underline;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #fff;
+      color: #003057;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background: #d9d9d9;
+    }
+
+    .login-container a.back-home {
+      display: block;
+      margin-top: 0.8rem;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .login-container a.back-home:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .navbar img {
+        height: 50px;
+      }
+      .login-container img {
+        width: 120px;
+      }
+      .login-container h2 {
+        font-size: 1.4rem;
+      }
+      .login-container input,
+      .login-container button {
+        padding: 12px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <img src="newDAHD_logo.png" alt="Left Logo"> <!-- Left logo -->
+    <img src="nddb_logo.png" alt="Right Logo"> <!-- Right logo -->
+  </div>
+
+  <!-- Login Section -->
+  <div class="login-container">
+    <img src="bharat_pashudhan_logo.png" alt="Center Logo"> <!-- Center logo -->
+    <h2>Login</h2>
+    <p>Enter your credentials to access your account</p>
+    <form>
+      <input type="text" placeholder="Enter User ID" required>
+      <input type="password" placeholder="Enter Password" required>
+
+      <!-- Links row -->
+      <div class="links-row">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Forgot Password</a>
+      </div>
+
+      <button type="submit"><a style="text-decoration: none; color:black;" href="/">Login</a></button>
+      <a href="/" class="back-home">Back to Home</a>
+    </form>
+  </div>
+</body>
+</html>
