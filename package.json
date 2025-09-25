@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start":"node app.js"
     "dev": "nodemon app.js"
   },
   "author": "",
@@ -15,3 +16,4 @@
     "nodemon": "^3.1.10"
   }
 }
+
